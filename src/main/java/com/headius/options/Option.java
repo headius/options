@@ -48,6 +48,7 @@ public abstract class Option<T> {
         this.prefix = prefix;
         this.name = name;
         this.longName = prefix + "." + name;
+        this.displayName = name;
         this.type = type;
         this.options = options == null ? new String[]{type.getSimpleName()} : options;
         this.defval = defval;
@@ -72,6 +73,7 @@ public abstract class Option<T> {
         this.prefix = null;
         this.name = null;
         this.longName = longName;
+        this.displayName = longName;
         this.type = type;
         this.options = options == null ? new String[]{type.getSimpleName()} : options;
         this.defval = defval;
@@ -179,7 +181,7 @@ public abstract class Option<T> {
                 sb.append('\n').append(category).append('\n');
             }
             sb
-                    .append(option.longName)
+                    .append(option.displayName)
                     .append('=')
                     .append(encodeWhitespace(option.load()))
                     .append('\n');
@@ -205,11 +207,7 @@ public abstract class Option<T> {
             sb.append("# Options: ").append(Arrays.toString(option.options)).append(", Default: ").append(encodeWhitespace(option.defval)).append(".\n");
             
             sb.append("\n#");
-            if (option.prefix != null) {
-                sb.append(option.name).append('=').append(encodeWhitespace(option.load()));
-            } else {
-                sb.append(option.longName).append('=').append(encodeWhitespace(option.load()));
-            }
+            sb.append(option.displayName).append('=').append(encodeWhitespace(option.load()));
             
             sb.append("\n\n");
         }
@@ -219,7 +217,9 @@ public abstract class Option<T> {
     
     private static Comparator<Option> OptionComparator = new Comparator<Option>() {
         public int compare(Option o1, Option o2) {
-            return o1.category.compareTo(o2.category);
+            int catComp = o1.category.compareTo(o2.category);
+            if (catComp != 0) return catComp;
+            return o1.displayName.compareTo(o2.displayName);
         }
     };
     
@@ -292,6 +292,7 @@ public abstract class Option<T> {
     public final String prefix;
     public final String name;
     public final String longName;
+    public final String displayName;
     public final Class<T> type;
     public final Object[] options;
     public final T defval;
