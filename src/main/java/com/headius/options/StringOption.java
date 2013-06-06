@@ -18,12 +18,12 @@ package com.headius.options;
  * A String-based Option.
  */
 public class StringOption extends Option<String> {
-    public StringOption(Enum category, String prefix, String name, String[] options, String defval, String description) {
-        super(category, prefix, name, String.class, options, defval, description);
+    public StringOption(String prefix, String name, Enum category, String[] options, String defval, String description) {
+        super(prefix, name, String.class, category, options, defval, description);
     }
     
-    public StringOption(Enum category, String longName, String[] options, String defval, String description) {
-        super(category, longName, String.class, options, defval, description);
+    public StringOption(String longName, Enum category, String[] options, String defval, String description) {
+        super(longName, String.class, category, options, defval, description);
     }
 
     public String reload() {

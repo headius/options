@@ -18,12 +18,12 @@ package com.headius.options;
  * A Boolean-based Option.
  */
 public class BooleanOption extends Option<Boolean> {
-    public BooleanOption(Enum category, String prefix, String name, Boolean defval, String description) {
-        super(category, prefix, name, Boolean.class, new Boolean[] {true, false}, defval, description);
+    public BooleanOption(String prefix, String name, Enum category, Boolean defval, String description) {
+        super(prefix, name, Boolean.class, category, new Boolean[] {true, false}, defval, description);
     }
 
-    public BooleanOption(Enum category, String longName, Boolean defval, String description) {
-        super(category, longName, Boolean.class, new Boolean[] {true, false}, defval, description);
+    public BooleanOption(String longName, Enum category, Boolean defval, String description) {
+        super(longName, Boolean.class, category, new Boolean[] {true, false}, defval, description);
     }
 
     public Boolean reload() {

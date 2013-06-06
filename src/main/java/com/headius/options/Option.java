@@ -34,16 +34,16 @@ public abstract class Option<T> {
      * Create a new option with the given values.
      * 
      * @param <C> an enumeration type
-     * @param category the category to which this option belongs
      * @param prefix the prefix used for loading this option from properties
      * @param name the rest of the property name
      * @param type the value type of the option
+     * @param category the category to which this option belongs
      * @param options a list of supported for the option, or null if the set is
      *                not applicable
      * @param defval the default value for the option
      * @param description a description for the option
      */
-    public Option(Enum category, String prefix, String name, Class<T> type, T[] options, T defval, String description) {
+    public Option(String prefix, String name, Class<T> type, Enum category, T[] options, T defval, String description) {
         this.category = category;
         this.prefix = prefix;
         this.name = name;
@@ -59,15 +59,15 @@ public abstract class Option<T> {
      * Create a new option with the given values.
      * 
      * @param <C> an enumeration type
-     * @param category the category to which this option belongs
      * @param longName the property name
      * @param type the value type of the option
+     * @param category the category to which this option belongs
      * @param options a list of supported for the option, or null if the set is
      *                not applicable
      * @param defval the default value for the option
      * @param description a description for the option
      */
-    public Option(Enum category, String longName, Class<T> type, T[] options, T defval, String description) {
+    public Option(String longName, Class<T> type, Enum category, T[] options, T defval, String description) {
         this.category = category;
         this.prefix = null;
         this.name = null;
@@ -80,91 +80,91 @@ public abstract class Option<T> {
     }
     
     public static Option<String> string(String prefix, String name, Enum category, String description) {
-        return new StringOption(category, prefix, name, null, null, description);
+        return new StringOption(prefix, name, category, null, null, description);
     }
     
     public static Option<String> string(String longName, Enum category, String description) {
-        return new StringOption(category, longName, null, null, description);
+        return new StringOption(longName, category, null, null, description);
     }
     
     public static Option<String> string(String prefix, String name, Enum category, String defval, String description) {
-        return new StringOption(category, prefix, name, null, defval, description);
+        return new StringOption(prefix, name, category, null, defval, description);
     }
     
     public static Option<String> string(String longName, Enum category, String defval, String description) {
-        return new StringOption(category, longName, null, defval, description);
+        return new StringOption(longName, category, null, defval, description);
     }
     
     public static Option<String> string(String prefix, String name, Enum category, String[] options, String description) {
-        return new StringOption(category, prefix, name, options, null, description);
+        return new StringOption(prefix, name, category, options, null, description);
     }
     
     public static Option<String> string(String longName, Enum category, String[] options, String description) {
-        return new StringOption(category, longName, options, null, description);
+        return new StringOption(longName, category, options, null, description);
     }
     
     public static Option<String> string(String prefix, String name, Enum category, String[] options, String defval, String description) {
-        return new StringOption(category, prefix, name, options, defval, description);
+        return new StringOption(prefix, name, category, options, defval, description);
     }
     
     public static Option<String> string(String longName, Enum category, String[] options, String defval, String description) {
-        return new StringOption(category, longName, options, defval, description);
+        return new StringOption(longName, category, options, defval, description);
     }
     
     public static Option<Boolean> bool(String prefix, String name, Enum category, String description) {
-        return new BooleanOption(category, prefix, name, null, description);
+        return new BooleanOption(prefix, name, category, null, description);
     }
     
     public static Option<Boolean> bool(String longName, Enum category, String description) {
-        return new BooleanOption(category, longName, null, description);
+        return new BooleanOption(longName, category, null, description);
     }
     
     public static Option<Boolean> bool(String prefix, String name, Enum category, Boolean defval, String description) {
-        return new BooleanOption(category, prefix, name, defval, description);
+        return new BooleanOption(prefix, name, category, defval, description);
     }
     
     public static Option<Boolean> bool(String longName, Enum category, Boolean defval, String description) {
-        return new BooleanOption(category, longName, defval, description);
+        return new BooleanOption(longName, category, defval, description);
     }
     
     public static Option<Integer> integer(String prefix, String name, Enum category, String description) {
-        return new IntegerOption(category, prefix, name, null, description);
+        return new IntegerOption(prefix, name, category, null, description);
     }
     
     public static Option<Integer> integer(String longName, Enum category, String description) {
-        return new IntegerOption(category, longName, null, description);
+        return new IntegerOption(longName, category, null, description);
     }
     
     public static Option<Integer> integer(String prefix, String name, Enum category, Integer defval, String description) {
-        return new IntegerOption(category, prefix, name, defval, description);
+        return new IntegerOption(prefix, name, category, defval, description);
     }
     
     public static Option<Integer> integer(String longName, Enum category, Integer defval, String description) {
-        return new IntegerOption(category, longName, defval, description);
+        return new IntegerOption(longName, category, defval, description);
     }
     
     public static Option<Integer> integer(String prefix, String name, Enum category, Integer[] options, Integer defval, String description) {
-        return new IntegerOption(category, prefix, name, options, defval, description);
+        return new IntegerOption(prefix, name, category, options, defval, description);
     }
     
     public static Option<Integer> integer(String longName, Enum category, Integer[] options, Integer defval, String description) {
-        return new IntegerOption(category, longName, options, defval, description);
+        return new IntegerOption(longName, category, options, defval, description);
     }
     
     public static <T extends Enum<T>> Option<T> enumeration(String prefix, String name, Enum category, Class<T> enumClass, String description) {
-        return new EnumerationOption(category, prefix, name, enumClass, null, description);
+        return new EnumerationOption(prefix, name, category, enumClass, null, description);
     }
     
     public static <T extends Enum<T>> Option<T> enumeration(String longName, Enum category, Class<T> enumClass, String description) {
-        return new EnumerationOption(category, longName, enumClass, null, description);
+        return new EnumerationOption(longName, category, enumClass, null, description);
     }
     
     public static <T extends Enum<T>> Option<T> enumeration(String prefix, String name, Enum category, Class<T> enumClass, T defval, String description) {
-        return new EnumerationOption(category, prefix, name, enumClass, defval, description);
+        return new EnumerationOption(prefix, name, category, enumClass, defval, description);
     }
     
     public static <T extends Enum<T>> Option<T> enumeration(String longName, Enum category, Class<T> enumClass, T defval, String description) {
-        return new EnumerationOption(category, longName, enumClass, defval, description);
+        return new EnumerationOption(longName, category, enumClass, defval, description);
     }
     
     public static String formatValues(Collection<Option> options) {

@@ -18,20 +18,20 @@ package com.headius.options;
  * An Integer-based Option.
  */
 public class IntegerOption extends Option<Integer> {
-    public IntegerOption(Enum category, String prefix, String name, Integer[] options, Integer defval, String description) {
-        super(category, prefix, name, Integer.class, options, defval, description);
+    public IntegerOption(String prefix, String name, Enum category, Integer[] options, Integer defval, String description) {
+        super(prefix, name, Integer.class, category, options, defval, description);
     }
     
-    public IntegerOption(Enum category, String longName, Integer[] options, Integer defval, String description) {
-        super(category, longName, Integer.class, options, defval, description);
+    public IntegerOption(String longName, Enum category, Integer[] options, Integer defval, String description) {
+        super(longName, Integer.class, category, options, defval, description);
     }
     
-    public IntegerOption(Enum category, String prefix, String name, Integer defval, String description) {
-        super(category, prefix, name, Integer.class, null, defval, description);
+    public IntegerOption(String prefix, String name, Enum category, Integer defval, String description) {
+        super(prefix, name, Integer.class, category, null, defval, description);
     }
     
-    public IntegerOption(Enum category, String longName, Integer defval, String description) {
-        super(category, longName, Integer.class, null, defval, description);
+    public IntegerOption(String longName, Enum category, Integer defval, String description) {
+        super(longName, Integer.class, category, null, defval, description);
     }
 
     public Integer reload() {
