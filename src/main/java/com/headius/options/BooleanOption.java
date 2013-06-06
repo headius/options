@@ -26,7 +26,7 @@ public class BooleanOption extends Option<Boolean> {
         super(category, longName, Boolean.class, new Boolean[] {true, false}, defval, description);
     }
 
-    public Boolean load() {
+    public Boolean reload() {
         String value = super.loadProperty();
 
         if (value == null) {

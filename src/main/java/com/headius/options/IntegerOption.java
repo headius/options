@@ -34,7 +34,7 @@ public class IntegerOption extends Option<Integer> {
         super(category, longName, Integer.class, null, defval, description);
     }
 
-    public Integer load() {
+    public Integer reload() {
         String value = super.loadProperty();
 
         if (value == null) {

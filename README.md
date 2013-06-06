@@ -23,37 +23,51 @@ import static com.headius.options.Option.*;
 enum MyCategory { STANDARD, EXTENDED, SPECIAL, OTHER }
 enum AccountType { ADMIN, GUEST, NORMAL }
 
-// without defaults or options
+// Without defaults or options...
 Option<String> databaseName = string("config.databaseName", MyCategory.STANDARD, "name of the database");
 Option<Integer> connCount = integer("config.connCount", MyCategory.EXTENDED, "connection count");
 Option<Boolean> authenticate = bool("config.authenticate", MyCategory.SPECIAL, "do authentication");
 Option<AccountType> acctType = enumeration("config.acctType", MyCategory.OTHER, AccountType.class, "account type");
 
-// with options
+// With options...
 Option<String> username = string("config.username", MyCategory.STANDARD, new String[]{"root", "guest"}, "account name");
 
-// with default
+// With default...
 Option<Boolean> timeout = bool("config.timeout", MyCategory.EXTENDED, true, "timeout connections");
 
-// with both
+// With both...
 Option<Integer> timeoutSecs = integer("config.timeoutSecs", MyCategory.EXTENDED, new Integer[]{15, 30, 60}, 30, "timeout in seconds");
 
-// load options; value is retrieved once and cached
+// Load options; value is retrieved once and cached.
 String dbname = databaseName.load();
 AccountType accountType = acctType.load();
+
+// Or reloading the property can be forced...
+System.setProperty("config.databaseName", "customers");
+dbname = databaseName.reload();
+
+// options can be queried to see if they were provided
+if (databaseName.isSpecified()) {
+    // logic for setting database name
+}
+
+// If your system has a standard property prefix, it can be specified in the
+// option. The prefix will be omitted from formatted output.
+Option<String> firstName = string("config", "first.name", MyCategory.STANDARD, "...");
 
 // formatted output of all options
 Option.formatOptions(Arrays.<Option>asList(
                              databaseName, connCount, authenticate, acctType,
-                             username, timeout, timeoutSecs));
+                             username, timeout, timeoutSecs, firstName));
 
 // short output of current settings
 Option.formatValues(Arrays.<Option>asList(
                              databaseName, connCount, authenticate, acctType,
-                             username, timeout, timeoutSecs));
+                             username, timeout, timeoutSecs, firstName));
 ```
 
-Formatted output of options is an editable properties file:
+Formatted output of options is an editable properties file. Note the "firstName"
+option does not include the "config." prefix.
 
 ```
 ################################################################################
@@ -63,12 +77,17 @@ Formatted output of options is an editable properties file:
 # name of the database
 # Options: [String], Default: null.
 
-#config.databaseName=null
+#config.databaseName=customers
 
 # account name
 # Options: [root, guest], Default: null.
 
 #config.username=null
+
+# ...
+# Options: [String], Default: null.
+
+#first.name=null
 
 
 ################################################################################

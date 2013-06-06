@@ -278,7 +278,15 @@ public abstract class Option<T> {
         return specified;
     }
 
-    public abstract T load();
+    public T load() {
+        if (this.value != null) return value;
+        
+        value = reload();
+        
+        return value;
+    }
+    
+    public abstract T reload();
 
     public final Enum category;
     public final String prefix;
@@ -288,5 +296,6 @@ public abstract class Option<T> {
     public final Object[] options;
     public final T defval;
     public final String description;
+    public T value;
     private boolean specified;
 }
