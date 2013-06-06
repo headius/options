@@ -9,7 +9,7 @@ Boolean, and Enum-based configurations. Non-Boolean options support a set of
 supported values, and all options allow specifying a default value. In addition,
 options are created with an Enum-based category (provided by the user) and a
 documentation string, which allows grouping properties and printing out a full
-set of options as a value, modifiable .properties file.
+set of options as a valid, modifiable .properties file.
 
 Usage
 -----
