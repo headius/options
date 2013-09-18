@@ -25,6 +25,8 @@ import static com.headius.options.Option.*;
 enum MyCategory { STANDARD, EXTENDED, SPECIAL, OTHER }
 enum AccountType { ADMIN, GUEST, NORMAL }
 
+// ...
+
 // Without defaults or options...
 Option<String> databaseName = string("config.databaseName", MyCategory.STANDARD, "name of the database");
 Option<Integer> connCount = integer("config.connCount", MyCategory.EXTENDED, "connection count");
@@ -58,14 +60,16 @@ if (databaseName.isSpecified()) {
 Option<String> firstName = string("config", "first.name", MyCategory.STANDARD, "...");
 
 // formatted output of all options
-Option.formatOptions(Arrays.<Option>asList(
-                             databaseName, connCount, authenticate, acctType,
-                             username, timeout, timeoutSecs, firstName));
+System.out.println(
+        Option.formatOptions(
+                databaseName, connCount, authenticate, acctType,
+                username, timeout, timeoutSecs, firstName));
 
 // short output of current settings
-Option.formatValues(Arrays.<Option>asList(
-                             databaseName, connCount, authenticate, acctType,
-                             username, timeout, timeoutSecs, firstName));
+System.out.println(
+        Option.formatValues(
+                databaseName, connCount, authenticate, acctType,
+                username, timeout, timeoutSecs, firstName));
 ```
 
 Formatted output of options is an editable properties file. Note the "firstName"
@@ -77,19 +81,17 @@ option does not include the "config." prefix.
 ################################################################################
 
 # name of the database
-# Options: [String], Default: null.
 
-#config.databaseName=customers
+#config.databaseName=
 
 # account name
-# Options: [root, guest], Default: null.
+# Options: [root, guest].
 
-#config.username=null
+#config.username=
 
 # ...
-# Options: [String], Default: null.
 
-#first.name=null
+#first.name=
 
 
 ################################################################################
@@ -97,9 +99,8 @@ option does not include the "config." prefix.
 ################################################################################
 
 # connection count
-# Options: [Integer], Default: null.
 
-#config.connCount=null
+#config.connCount=
 
 # timeout connections
 # Options: [true, false], Default: true.
@@ -117,9 +118,9 @@ option does not include the "config." prefix.
 ################################################################################
 
 # do authentication
-# Options: [true, false], Default: null.
+# Options: [true, false].
 
-#config.authenticate=null
+#config.authenticate=
 
 
 ################################################################################
@@ -127,7 +128,27 @@ option does not include the "config." prefix.
 ################################################################################
 
 # account type
-# Options: [ADMIN, GUEST, NORMAL], Default: null.
+# Options: [ADMIN, GUEST, NORMAL].
 
-#config.acctType=null
+#config.acctType=
+```
+
+You can also format the values of all options, loaded on the current JVM.
+
+```
+STANDARD
+config.databaseName=customers
+config.username=<unspecified>
+first.name=<unspecified>
+
+EXTENDED
+config.connCount=<unspecified>
+config.timeout=true
+config.timeoutSecs=30
+
+SPECIAL
+config.authenticate=<unspecified>
+
+OTHER
+config.acctType=<unspecified>
 ```

@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.headius.options.example;
 
 import com.headius.options.Option;
@@ -67,14 +68,14 @@ public class Example {
 
         // formatted output of all options
         System.out.println(
-                Option.formatOptions(Arrays.<Option>asList(
+                Option.formatOptions(
                         databaseName, connCount, authenticate, acctType,
-                        username, timeout, timeoutSecs, firstName)));
+                        username, timeout, timeoutSecs, firstName));
 
         // short output of current settings
         System.out.println(
-                Option.formatValues(Arrays.<Option>asList(
+                Option.formatValues(
                         databaseName, connCount, authenticate, acctType,
-                        username, timeout, timeoutSecs, firstName)));
+                        username, timeout, timeoutSecs, firstName));
     }
 }
