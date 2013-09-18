@@ -14,7 +14,7 @@ set of options as a valid, modifiable .properties file.
 Usage
 -----
 
-A real-world usage example from the [JRuby project's Options class](https://github.com/jruby/jruby/blob/master/src/org/jruby/util/cli/Options.java).
+A real-world usage example from the [JRuby project's Options class](https://github.com/jruby/jruby/blob/master/core/src/main/java/org/jruby/util/cli/Options.java).
 
 Example usage of the four types of options:
 
