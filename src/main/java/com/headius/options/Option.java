@@ -26,6 +26,15 @@ import java.util.List;
  * options, default value, and description.
  *
  * This type should be subclassed for specific types of values.
+ * 
+ * @see StringOption
+ * @see IntegerOption
+ * @see BooleanOption
+ * @see EnuerationOption
+ * @see Option#string 
+ * @see Option#integer 
+ * @see Option#bool 
+ * @see Option#enumeration 
  *
  * @param <T> the type of value associated with the option
  */
@@ -35,7 +44,7 @@ public abstract class Option<T> {
      * 
      * @param <C> an enumeration type
      * @param prefix the prefix used for loading this option from properties
-     * @param name the rest of the property name
+     * @param shortName the rest of the property name
      * @param type the value type of the option
      * @param category the category to which this option belongs
      * @param options a list of supported for the option, or null if the set is
@@ -43,14 +52,14 @@ public abstract class Option<T> {
      * @param defval the default value for the option
      * @param description a description for the option
      */
-    public Option(String prefix, String name, Class<T> type, Enum category, T[] options, T defval, String description) {
+    public Option(String prefix, String shortName, Class<T> type, Enum category, T[] options, T defval, String description) {
         this.category = category;
         this.prefix = prefix;
-        this.name = name;
-        this.longName = prefix + "." + name;
-        this.displayName = name;
+        this.shortName = shortName;
+        this.longName = prefix + "." + shortName;
+        this.displayName = shortName;
         this.type = type;
-        this.options = options == null ? new String[]{type.getSimpleName()} : options;
+        this.options = options;
         this.defval = defval;
         this.description = description;
         this.specified = false;
@@ -71,104 +80,194 @@ public abstract class Option<T> {
     public Option(String longName, Class<T> type, Enum category, T[] options, T defval, String description) {
         this.category = category;
         this.prefix = null;
-        this.name = null;
+        this.shortName = null;
         this.longName = longName;
         this.displayName = longName;
         this.type = type;
-        this.options = options == null ? new String[]{type.getSimpleName()} : options;
+        this.options = options;
         this.defval = defval;
         this.description = description;
         this.specified = false;
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String prefix, String name, Enum category, String description) {
         return new StringOption(prefix, name, category, null, null, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String longName, Enum category, String description) {
         return new StringOption(longName, category, null, null, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String prefix, String name, Enum category, String defval, String description) {
         return new StringOption(prefix, name, category, null, defval, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String longName, Enum category, String defval, String description) {
         return new StringOption(longName, category, null, defval, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String prefix, String name, Enum category, String[] options, String description) {
         return new StringOption(prefix, name, category, options, null, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String longName, Enum category, String[] options, String description) {
         return new StringOption(longName, category, options, null, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String prefix, String name, Enum category, String[] options, String defval, String description) {
         return new StringOption(prefix, name, category, options, defval, description);
     }
     
+    /**
+     * Create a new String option with the given configuration.
+     */
     public static Option<String> string(String longName, Enum category, String[] options, String defval, String description) {
         return new StringOption(longName, category, options, defval, description);
     }
     
+    /**
+     * Create a new Boolean option with the given configuration.
+     */
     public static Option<Boolean> bool(String prefix, String name, Enum category, String description) {
         return new BooleanOption(prefix, name, category, null, description);
     }
     
+    /**
+     * Create a new Boolean option with the given configuration.
+     */
     public static Option<Boolean> bool(String longName, Enum category, String description) {
         return new BooleanOption(longName, category, null, description);
     }
     
+    /**
+     * Create a new Boolean option with the given configuration.
+     */
     public static Option<Boolean> bool(String prefix, String name, Enum category, Boolean defval, String description) {
         return new BooleanOption(prefix, name, category, defval, description);
     }
     
+    /**
+     * Create a new Boolean option with the given configuration.
+     */
     public static Option<Boolean> bool(String longName, Enum category, Boolean defval, String description) {
         return new BooleanOption(longName, category, defval, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String prefix, String name, Enum category, String description) {
         return new IntegerOption(prefix, name, category, null, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
+    public static Option<Integer> integer(String prefix, String name, Enum category, Integer[] options, String description) {
+        return new IntegerOption(prefix, name, category, options, null, description);
+    }
+    
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String longName, Enum category, String description) {
         return new IntegerOption(longName, category, null, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
+    public static Option<Integer> integer(String longName, Enum category, Integer[] options, String description) {
+        return new IntegerOption(longName, category, options, null, description);
+    }
+    
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String prefix, String name, Enum category, Integer defval, String description) {
         return new IntegerOption(prefix, name, category, defval, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String longName, Enum category, Integer defval, String description) {
         return new IntegerOption(longName, category, defval, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String prefix, String name, Enum category, Integer[] options, Integer defval, String description) {
         return new IntegerOption(prefix, name, category, options, defval, description);
     }
     
+    /**
+     * Create a new Integer option with the given configuration.
+     */
     public static Option<Integer> integer(String longName, Enum category, Integer[] options, Integer defval, String description) {
         return new IntegerOption(longName, category, options, defval, description);
     }
     
+    /**
+     * Create a new Enumeration-based option with the given configuration.
+     */
     public static <T extends Enum<T>> Option<T> enumeration(String prefix, String name, Enum category, Class<T> enumClass, String description) {
         return new EnumerationOption(prefix, name, category, enumClass, null, description);
     }
     
+    /**
+     * Create a new Enumeration-based option with the given configuration.
+     */
     public static <T extends Enum<T>> Option<T> enumeration(String longName, Enum category, Class<T> enumClass, String description) {
         return new EnumerationOption(longName, category, enumClass, null, description);
     }
     
-    public static <T extends Enum<T>> Option<T> enumeration(String prefix, String name, Enum category, Class<T> enumClass, T defval, String description) {
-        return new EnumerationOption(prefix, name, category, enumClass, defval, description);
+    /**
+     * Create a new Enumeration-based option with the given configuration.
+     */
+    public static <T extends Enum<T>> Option<T> enumeration(String prefix, String name, Enum category, T defval, String description) {
+        return new EnumerationOption(prefix, name, category, defval.getClass(), defval, description);
     }
     
-    public static <T extends Enum<T>> Option<T> enumeration(String longName, Enum category, Class<T> enumClass, T defval, String description) {
-        return new EnumerationOption(longName, category, enumClass, defval, description);
+    /**
+     * Create a new Enumeration-based option with the given configuration.
+     */
+    public static <T extends Enum<T>> Option<T> enumeration(String longName, Enum category, T defval, String description) {
+        return new EnumerationOption(longName, category, defval.getClass(), defval, description);
     }
     
+    /**
+     * Format the given options to show their loaded values in the current JVM.
+     */
+    public static String formatValues(Option... options) {
+        return formatValues(Arrays.asList(options));
+    }
+    
+    /**
+     * Format the given options to show their loaded values in the current JVM.
+     */
     public static String formatValues(Collection<Option> options) {
         StringBuilder sb = new StringBuilder();
         List<Option> sorted = new ArrayList<Option>(options);
@@ -182,13 +281,30 @@ public abstract class Option<T> {
             }
             sb
                     .append(option.displayName)
-                    .append('=')
-                    .append(encodeWhitespace(option.load()))
-                    .append('\n');
+                    .append('=');
+            option.load();
+            if (option.isSpecified() || option.defval != null) {
+                sb.append(encodeWhitespace(option.load()));
+            } else {
+                sb.append("<unspecified>");
+            }
+            sb.append('\n');
         }
         return sb.toString();
     }
+    
+    /**
+     * Format the given options in a way suitable for use as a configuration
+     * file or documentation.
+     */
+    public static String formatOptions(Option... options) {
+        return formatOptions(Arrays.asList(options));
+    }
 
+    /**
+     * Format the given options in a way suitable for use as a configuration
+     * file or documentation.
+     */
     public static String formatOptions(Collection<Option> options) {
         StringBuilder sb = new StringBuilder();
         List<Option> sorted = new ArrayList<Option>(options);
@@ -204,10 +320,23 @@ public abstract class Option<T> {
             }
             sb.append("# ").append(option.description).append('\n');
             
-            sb.append("# Options: ").append(Arrays.toString(option.options)).append(", Default: ").append(encodeWhitespace(option.defval)).append(".\n");
+            if (option.options != null) {
+                sb.append("# Options: ").append(Arrays.toString(option.options));
+                if (option.defval != null) {
+                    sb.append(", Default: ").append(encodeWhitespace(option.defval));
+                }
+                sb.append(".\n");
+            } else if (option.defval != null) {
+                sb.append("# Default: ").append(encodeWhitespace(option.defval));
+                sb.append(".\n");
+            }
             
             sb.append("\n#");
-            sb.append(option.displayName).append('=').append(encodeWhitespace(option.load()));
+            if (option.defval != null) {
+                sb.append(option.displayName).append('=').append(encodeWhitespace(option.defval.toString()));
+            } else {
+                sb.append(option.displayName).append('=');
+            }
             
             sb.append("\n\n");
         }
@@ -262,6 +391,9 @@ public abstract class Option<T> {
         return longName;
     }
 
+    /**
+     * Load the option's property, as if by calling java.lang.System#getProperty
+     */
     public String loadProperty() {
         String value = null;
         try {
@@ -274,29 +406,104 @@ public abstract class Option<T> {
         return value;
     }
 
+    /**
+     * Return true if the option's property was specified, false otherwise.
+     */
     public boolean isSpecified() {
         return specified;
     }
 
-    public T load() {
-        if (this.value != null) return value;
+    /**
+     * Return the value of the option, loading if it has not been already.
+     */
+    public final T load() {
+        if (this.loaded) return value;
         
-        value = reload();
+        return reload();
+    }
+    
+    /**
+     * Force a load of the option's property and return the loaded value.
+     */
+    public final T reload() {
+        loaded = true;
+        value = reloadValue();
         
         return value;
     }
     
-    public abstract T reload();
+    /**
+     * Perform the appropriate load and conversion for the option's property.
+     */
+    protected abstract T reloadValue();
+    
+    /**
+     * If the option has a short name, return it. Otherwise null.
+     */
+    public String shortName() {
+        return shortName;
+    }
+    
+    /**
+     * Return the full property name for the option.
+     */
+    public String propertyName() {
+        return longName;
+    }
+    
+    /**
+     * If the property has a prefix, return it. Otherwise null.
+     */
+    public String prefix() {
+        return prefix;
+    }
+    
+    /**
+     * The display name of the option's property, either the short name or the full name.
+     */
+    public String displayName() {
+        return displayName;
+    }
+    
+    /**
+     * The type returned for the option.
+     * @return 
+     */
+    public Class<T> type() {
+        return type;
+    }
+    
+    /**
+     * The array of accepted values for the option, or null if any values are accepted.
+     */
+    public T[] options() {
+        return options == null ? null : options.clone();
+    }
+    
+    /**
+     * The default value for the option, or null if no default is provided.
+     */
+    public T defaultValue() {
+        return defval;
+    }
+    
+    /**
+     * The long description of the property, as for documentation and configuration file templates.
+     */
+    public String description() {
+        return description;
+    }
 
-    public final Enum category;
-    public final String prefix;
-    public final String name;
-    public final String longName;
-    public final String displayName;
-    public final Class<T> type;
-    public final Object[] options;
-    public final T defval;
-    public final String description;
-    public T value;
+    private final Enum category;
+    private final String prefix;
+    private final String shortName;
+    private final String longName;
+    private final String displayName;
+    protected final Class<T> type;
+    private final T[] options;
+    protected final T defval;
+    private final String description;
+    private T value;
     private boolean specified;
+    private boolean loaded;
 }

@@ -26,7 +26,7 @@ public class EnumerationOption<T extends Enum<T>> extends Option<T> {
         super(longName, enumType, category, (T[])enumType.getEnumConstants(), defval, description);
     }
 
-    public T reload() {
+    protected T reloadValue() {
         String value = super.loadProperty();
 
         if (value == null) {

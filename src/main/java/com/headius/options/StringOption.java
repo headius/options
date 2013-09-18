@@ -26,7 +26,7 @@ public class StringOption extends Option<String> {
         super(longName, String.class, category, options, defval, description);
     }
 
-    public String reload() {
+    protected String reloadValue() {
         String value = super.loadProperty();
 
         if (value == null) {
