@@ -395,7 +395,9 @@ public abstract class Option<T> {
      * Load the option's property, as if by calling java.lang.System#getProperty
      */
     public String loadProperty() {
-        String value = null;
+        String value = forced;
+        if (value != null) return value;
+
         try {
             value = System.getProperty(longName);
         } catch (SecurityException se) {
@@ -430,6 +432,24 @@ public abstract class Option<T> {
         value = reloadValue();
         
         return value;
+    }
+
+    /**
+     * Force the property value to the given value for all future loads and reloads.
+     * @param value
+     */
+    public void force(String value) {
+        forced = value;
+        reload();
+    }
+
+    /**
+     * Undoes any previous force, and goes back to an unloaded state.
+     */
+    public void unforce() {
+        forced = null;
+        loaded = false;
+        value = null;
     }
     
     /**
@@ -504,6 +524,7 @@ public abstract class Option<T> {
     protected final T defval;
     private final String description;
     private T value;
+    private String forced;
     private boolean specified;
     private boolean loaded;
 }
