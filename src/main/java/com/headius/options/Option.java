@@ -394,7 +394,7 @@ public abstract class Option<T> {
     /**
      * Load the option's property, as if by calling java.lang.System#getProperty
      */
-    public String loadProperty() {
+    public synchronized String loadProperty() {
         String value = forced;
         if (value != null) return value;
 
@@ -419,7 +419,7 @@ public abstract class Option<T> {
      * Return the value of the option, loading if it has not been already.
      */
     public final T load() {
-        if (this.loaded) return value;
+        if (loaded) return value;
         
         return reload();
     }
@@ -427,9 +427,11 @@ public abstract class Option<T> {
     /**
      * Force a load of the option's property and return the loaded value.
      */
-    public final T reload() {
-        loaded = true;
+    public final synchronized T reload() {
+        if (loaded) return value;
+
         value = reloadValue();
+        loaded = true;
         
         return value;
     }
@@ -438,7 +440,7 @@ public abstract class Option<T> {
      * Force the property value to the given value for all future loads and reloads.
      * @param value
      */
-    public void force(String value) {
+    public synchronized void force(String value) {
         forced = value;
         reload();
     }
@@ -446,7 +448,7 @@ public abstract class Option<T> {
     /**
      * Undoes any previous force, and goes back to an unloaded state.
      */
-    public void unforce() {
+    public synchronized void unforce() {
         forced = null;
         loaded = false;
         value = null;
@@ -523,8 +525,8 @@ public abstract class Option<T> {
     private final T[] options;
     protected final T defval;
     private final String description;
-    private T value;
     private String forced;
     private boolean specified;
-    private boolean loaded;
+    private volatile T value;
+    private volatile boolean loaded;
 }
