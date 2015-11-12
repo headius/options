@@ -442,6 +442,7 @@ public abstract class Option<T> {
      */
     public synchronized void force(String value) {
         forced = value;
+        loaded = false;
         reload();
     }
 
