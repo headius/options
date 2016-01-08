@@ -30,7 +30,7 @@ import java.util.List;
  * @see StringOption
  * @see IntegerOption
  * @see BooleanOption
- * @see EnuerationOption
+ * @see EnumerationOption
  * @see Option#string 
  * @see Option#integer 
  * @see Option#bool 
