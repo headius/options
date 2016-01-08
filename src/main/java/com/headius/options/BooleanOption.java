@@ -16,6 +16,9 @@ package com.headius.options;
 
 /**
  * A Boolean-based Option.
+ *
+ * Unlike the other options, if a boolean property is specified but is blank,
+ * it is considered an "on" switch and a true value.
  */
 public class BooleanOption extends Option<Boolean> {
     public BooleanOption(String prefix, String name, Enum category, Boolean defval, String description) {
@@ -31,6 +34,9 @@ public class BooleanOption extends Option<Boolean> {
 
         if (value == null) {
             return defval;
+        } else if (value.equals("")) {
+            // property specified as blank is considered an "on" switch, use true
+            return true;
         }
 
         return Boolean.valueOf(value);
