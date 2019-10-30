@@ -229,7 +229,35 @@ public abstract class Option<T> {
     public static Option<Integer> integer(String longName, Enum category, Integer[] options, Integer defval, String description) {
         return new IntegerOption(longName, category, options, defval, description);
     }
-    
+
+    /**
+     * Create a new Long option with the given configuration.
+     */
+    public static Option<Long> longInt(String prefix, String name, Enum category, String description) {
+        return new LongOption(prefix, name, category, null, description);
+    }
+
+    /**
+     * Create a new Long option with the given configuration.
+     */
+    public static Option<Long> longInt(String longName, Enum category, String description) {
+        return new LongOption(longName, category, null, description);
+    }
+
+    /**
+     * Create a new Long option with the given configuration.
+     */
+    public static Option<Long> longInt(String prefix, String name, Enum category, Long defval, String description) {
+        return new LongOption(prefix, name, category, defval, description);
+    }
+
+    /**
+     * Create a new Long option with the given configuration.
+     */
+    public static Option<Long> longInt(String longName, Enum category, Long defval, String description) {
+        return new LongOption(longName, category, defval, description);
+    }
+
     /**
      * Create a new Enumeration-based option with the given configuration.
      */
