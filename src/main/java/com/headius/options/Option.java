@@ -42,7 +42,6 @@ public abstract class Option<T> {
     /**
      * Create a new option with the given values.
      * 
-     * @param <C> an enumeration type
      * @param prefix the prefix used for loading this option from properties
      * @param shortName the rest of the property name
      * @param type the value type of the option
@@ -68,7 +67,6 @@ public abstract class Option<T> {
     /**
      * Create a new option with the given values.
      * 
-     * @param <C> an enumeration type
      * @param longName the property name
      * @param type the value type of the option
      * @param category the category to which this option belongs
