@@ -57,41 +57,38 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.1</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Automatic-Module-Name>com.headius.options</Automatic-Module-Name>
-            </manifestEntries>
-          </archive>
-        </configuration>
+        <version>3.7.0</version>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <includes>
+                <include>module-info.java</include>
+              </includes>
+              <release>9</release>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <release>9</release>
+            </configuration>
+          </execution>
+          <execution>
+            <id>base-compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <source>8</source>
+              <target>8</target>
+              <excludes>
+                <exclude>module-info.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>java9</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <!-- Use -release compiler option rather than source/target if 9+ -->
-              <release>${maven.compiler.target}</release>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-    </profile>
-  </profiles>
 </project>
