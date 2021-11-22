@@ -20,8 +20,8 @@ package com.headius.options;
  * A String-based Option.
  */
 public class StringOption extends Option<String> {
-    public StringOption(String prefix, String name, Enum category, String[] options, String defval, String description) {
-        super(prefix, name, String.class, category, options, defval, description);
+    public StringOption(String prefix, String shortName, Enum category, String[] options, String defval, String description) {
+        super(prefix, shortName, String.class, category, options, defval, description);
     }
     
     public StringOption(String longName, Enum category, String[] options, String defval, String description) {

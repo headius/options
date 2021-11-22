@@ -23,8 +23,8 @@ package com.headius.options;
  * it is considered an "on" switch and a true value.
  */
 public class BooleanOption extends Option<Boolean> {
-    public BooleanOption(String prefix, String name, Enum category, Boolean defval, String description) {
-        super(prefix, name, Boolean.class, category, new Boolean[] {true, false}, defval, description);
+    public BooleanOption(String prefix, String shortName, Enum category, Boolean defval, String description) {
+        super(prefix, shortName, Boolean.class, category, new Boolean[] {true, false}, defval, description);
     }
 
     public BooleanOption(String longName, Enum category, Boolean defval, String description) {

@@ -20,8 +20,8 @@ package com.headius.options;
  * An Enum-based Option.
  */
 public class EnumerationOption<T extends Enum<T>> extends Option<T> {
-    public EnumerationOption(String prefix, String name, Enum category, Class<T> enumType, T defval, String description) {
-        super(prefix, name, enumType, category, (T[])enumType.getEnumConstants(), defval, description);
+    public EnumerationOption(String prefix, String shortName, Enum category, Class<T> enumType, T defval, String description) {
+        super(prefix, shortName, enumType, category, (T[])enumType.getEnumConstants(), defval, description);
     }
     
     public EnumerationOption(String longName, Enum category, Class<T> enumType, T defval, String description) {

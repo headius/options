@@ -20,16 +20,16 @@ package com.headius.options;
  * An Integer-based Option.
  */
 public class IntegerOption extends Option<Integer> {
-    public IntegerOption(String prefix, String name, Enum category, Integer[] options, Integer defval, String description) {
-        super(prefix, name, Integer.class, category, options, defval, description);
+    public IntegerOption(String prefix, String shortName, Enum category, Integer[] options, Integer defval, String description) {
+        super(prefix, shortName, Integer.class, category, options, defval, description);
     }
     
     public IntegerOption(String longName, Enum category, Integer[] options, Integer defval, String description) {
         super(longName, Integer.class, category, options, defval, description);
     }
     
-    public IntegerOption(String prefix, String name, Enum category, Integer defval, String description) {
-        super(prefix, name, Integer.class, category, null, defval, description);
+    public IntegerOption(String prefix, String shortName, Enum category, Integer defval, String description) {
+        super(prefix, shortName, Integer.class, category, null, defval, description);
     }
     
     public IntegerOption(String longName, Enum category, Integer defval, String description) {
